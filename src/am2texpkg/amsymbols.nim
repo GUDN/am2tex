@@ -19,7 +19,7 @@ proc parseSymbolsFile(content: string): Table[string, SymbolsEntry] =
 
 const
   Symbols = parseSymbolsFile(staticRead"../../am.symbols")
-  amSymbols* = toSeq(Symbols.keys)
+  AmSymbols* = toSeq(Symbols.keys)
 
 proc detectType*(symbol: string): Option[string] =
   if symbol in Symbols:

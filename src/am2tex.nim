@@ -1,2 +1,8 @@
+import os
+
+import am2texpkg/tokenizer
+
 when isMainModule:
-  echo "Hello, World!"
+  let amStream = if paramCount() > 0: paramStr(1) else: readAll(stdin)
+  for token in toTokens(amStream):
+    echo token
