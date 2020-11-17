@@ -5,11 +5,30 @@ import options
 import amsymbols
 
 type
+  TokenType* = enum
+    ttNumber = "number"
+    ttString = "string"
+    ttLeftBracket = "left_bracket"
+    ttRightBracket = "right_bracket"
+    ttFont = "font"
+    ttUnary = "unary"
+    ttBinary = "binary"
+    ttOperator = "operator"
+    ttChar = "char"
+    ttLetter = "letter"
+    ttFunction = "function"
+    ttDelimiter = "delimiter"
   Token* = object
-    tokenType*: string
+    tokenType*: TokenType
     value*: string
 
 proc `$`*(token: Token): string = &"{token.value} ({token.tokenType} token)"
+
+proc newToken(tokenType, value: string): Token =
+  result = Token(
+    tokenType: parseEnum[TokenType](tokenType),
+    value: value
+  )
 
 proc getNextDigits(stream: var string): string =
   if stream.len == 0: return
@@ -33,9 +52,9 @@ proc getNextNumber(stream: var string): Option[Token] =
     var b = getNextDigits(stream)
     if a == "": a = "0"
     if b == "": b = "0"
-    result = some(Token(tokenType: "number", value: &"{sign}{a}.{b}"))
+    result = some newToken("number", &"{sign}{a}.{b}")
   elif a != "":
-    result = some(Token(tokenType: "number", value: &"{sign}{a}"))
+    result = some newToken("number", &"{sign}{a}")
   elif is_neg:
     stream = '-' & stream
 
@@ -50,7 +69,7 @@ proc getNextString(stream: var string): Option[Token] =
     inc i
     if i == stream.len: return
   stream.removePrefix(&"\"{str}\"")
-  result = some(Token(tokenType: "string", value: str))
+  result = some newToken("string", str)
 
 
 proc getNextSymbol(stream: var string): Option[Token] =
@@ -59,7 +78,7 @@ proc getNextSymbol(stream: var string): Option[Token] =
     if stream in AmSymbols:
       let tokenType = detectType(stream)
       if tokenType.isNone: return
-      result = some(Token(tokenType: tokenType.get(), value: stream))
+      result = some newToken(tokenType.get(), stream)
       stream = ""
   else:
     var
@@ -77,7 +96,7 @@ proc getNextSymbol(stream: var string): Option[Token] =
       stream.removePrefix(resultSymbol)
       let tokenType = detectType(resultSymbol)
       if tokenType.isNone: return
-      result = some(Token(tokenType: tokenType.get(), value: resultSymbol))
+      result = some newToken(tokenType.get(), resultSymbol)
 
 
 template tryGetNext(f: untyped, v: Option[Token]) =
