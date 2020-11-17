@@ -136,6 +136,12 @@ _|_ \bot
 TT \top
 |-- \vdash
 |== \vDash
+/_ \angle
+frown \frown
+/_\ \triangle
+diamond \diamond
+square \square
+deg \degree
 uarr \uparrow
 darr \downarrow
 rarr \rightarrow
