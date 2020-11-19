@@ -6,7 +6,7 @@ from sequtils import toSeq
 
 type SymbolsEntry = tuple[symbolType: string, texValue: string]
 
-proc parseSymbolsFile(content: string): Table[string, SymbolsEntry] =
+proc parseSymbolsFile(content: string): Table[string, SymbolsEntry] {.compileTime.} =
   var currentType = ""
   for line in content.splitLines:
     if line.endsWith(" :="):
