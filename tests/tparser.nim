@@ -2,7 +2,7 @@ import unittest
 
 import am2texpkg/parser
 
-suite "test simple expressions":
+suite "parse simple expressions":
   test "1 + 2":
     let result = parse("1 + 2")
     check:
@@ -31,7 +31,7 @@ suite "test simple expressions":
     let addOperation = result.children[1]
 
 
-suite "test matrix expressions":
+suite "parse matrix expressions":
   test "[1, 2; 3, 4)":
     let result = parse("[1, 2; 3, 4)")
     check:
@@ -86,7 +86,7 @@ suite "test matrix expressions":
       innerLine2.children.len == 1
       innerLine2.children[0].value == "3"
 
-suite "test interval expressions":
+suite "parse interval expressions":
   test "[1:3/2]":
     let result = parse("[1:3/2]")
     check:
@@ -99,7 +99,7 @@ suite "test interval expressions":
       result.children[2].children[0].value == "3"
       result.children[2].children[1].value == "2"
 
-suite "test complex expressions":
+suite "parse complex expressions":
   test "sum_(i=1)^n i^3=((n(n+1))/2)^2":
     let result = parse("sum_(i=1)^n i^3=((n(n+1))/2)^2")
     check:

@@ -8,7 +8,7 @@ template ttest(input: string, result: seq[Token]) =
     let tokens = toSeq toTokens(input)
     check tokens == result
 
-suite "test number tokenization":
+suite "tokenize numbers":
   ttest("123 123 123", @[
     Token(tokenType: ttNumber, value: "123"),
     Token(tokenType: ttNumber, value: "123"),
@@ -27,7 +27,7 @@ suite "test number tokenization":
     Token(tokenType: ttNumber, value: "-123.0"),
   ])
 
-suite "test symbol tokenization":
+suite "tokenize symbols":
   ttest("sumprodabc", @[
     Token(tokenType: ttChar, value: "sum"),
     Token(tokenType: ttChar, value: "prod"),
@@ -44,7 +44,7 @@ suite "test symbol tokenization":
     Token(tokenType: ttUnary, value: "abs"),
   ])
 
-suite "complex tokenization":
+suite "tokenize complex expressions":
   ttest("f(x) = 2x + 1", @[
     Token(tokenType: ttLetter, value: "f"),
     Token(tokenType: ttLeft_bracket, value: "("),
