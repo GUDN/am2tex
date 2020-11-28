@@ -1,8 +1,8 @@
 # Package
 
-version       = "0.1.0"
+version       = "1.0.0"
 author        = "Daniil Novoselov"
-description   = "A AsciiMath to Latex syntax converter"
+description   = "A AsciiMath to Latex converter"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
