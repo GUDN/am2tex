@@ -42,7 +42,7 @@ proc render(node: Node): string =
     else: result = getTexSymbol(node.value)
   of ntString:
     let value = prepareString(node.value)
-    result = r"\text{" & value & "}"
+    result = r"\textrm{" & value & "}"
   of ntFString:
     let value = prepareString(node.value)
     result = getTexSymbol(node.font) & "{" & value & "}"
