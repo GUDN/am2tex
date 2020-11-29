@@ -123,6 +123,7 @@ proc simplify(node: Node; parentType: NodeType): Node =
     case parentType
     of ntEmpty: result = node
     of ntFraction, ntSubsup: result = inner
+    of ntBinary, ntUnary: result = inner
     else: result = node
 
 
