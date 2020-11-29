@@ -265,6 +265,6 @@ log2 \log_2
 log \log
 gcd \gcd
 delimiter :=
-,
-;
+, ,
+; ;
 : \colon
