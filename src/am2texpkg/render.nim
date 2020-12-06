@@ -128,13 +128,14 @@ proc render*(stream: string, optimize = true): string =
   if optimize:
     var mask = newSeq[int](result.len)
     var startIndex = 0
-    while true:
-      let (first, last) = stream.findBounds(OptimizeRegex, startIndex)
-      if first == -1 and last == 0: break
-      startIndex = last + 1
-      for i in first..last: mask[i] = 1
+    while startIndex < result.len:
+      let l = result.matchLen(OptimizeRegex, startIndex)
+      if l > 0:
+        for i in startIndex..<(startIndex + l): mask[i] = 1
+        startIndex += l
+      else: inc startIndex
     let resultCopy = result
     result = ""
     for i, v in mask:
-      if v == 1: continue
+      if v == 1: result &= resultCopy[i]
       elif resultCopy[i] != ' ': result &= resultCopy[i]
