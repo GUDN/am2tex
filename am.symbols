@@ -148,7 +148,9 @@ rarr \rightarrow
 larr \leftarrow
 harr \harr
 rArr \Rightarrow
-lArr \LeftArrow
+lArr \Leftarrow
+uArr \Uparrow
+dArr \Downarrow
 hArr \hArr
 alpha \alpha
 beta \beta
