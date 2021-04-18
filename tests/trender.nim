@@ -18,3 +18,6 @@ suite "render complex expressions":
 suite "render latex literal":
   test r"1 + $\frac{1}{2}$":
     check render(r"1 + $\frac{1}{2}$") == r"1+{\frac{1}{2}}"
+
+  test "1$&=$2":
+    check render("1$&=$2") == "1{&=}2"

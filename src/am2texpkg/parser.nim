@@ -42,7 +42,7 @@ proc toString(node: Node; indent = 0): string =
   of ntToken: result = node.value & " " & $node.tokenType
   of ntFString: result = node.value & " (font " & node.font & ")"
   of ntEmpty: result = "empty"
-  of ntBracket, ntString: result = node.value
+  of ntBracket, ntString, ntLatex: result = node.value
   of ntSubsup:
     result = "subsup\n"
     result &= toString(node.base, indent + 1) & '\n'
