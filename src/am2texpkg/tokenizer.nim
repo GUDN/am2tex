@@ -18,6 +18,7 @@ type
     ttLetter = "letter"
     ttFunction = "function"
     ttDelimiter = "delimiter"
+    ttLatex = "latex"
   Token* = object
     tokenType*: TokenType
     value*: string
@@ -57,6 +58,20 @@ proc getNextNumber(stream: var string): Option[Token] =
     result = some newToken("number", &"{sign}{a}")
   elif is_neg:
     stream = '-' & stream
+
+
+proc getNextLatex(stream: var string): Option[Token] =
+  if stream.len <= 1 or stream[0] != '$': return
+  var
+    latex = ""
+    i = 1
+  while stream[i] != '$':
+    latex.add stream[i]
+    inc i
+    if i == stream.len: return
+  stream.removePrefix(&"${latex}$")
+  result = some newToken("latex", latex)
+
 
 
 proc getNextString(stream: var string): Option[Token] =
@@ -114,5 +129,6 @@ iterator toTokens*(stream: string): Token =
     var token: Option[Token]
     tryGetNext(getNextNumber(stream), token)
     tryGetNext(getNextString(stream), token)
+    tryGetNext(getNextLatex(stream), token)
     tryGetNext(getNextSymbol(stream), token)
     break

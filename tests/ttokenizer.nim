@@ -86,3 +86,10 @@ suite "tokenize complex expressions":
     Token(tokenType: ttOperator, value: "^"),
     Token(tokenType: ttNumber, value: "2"),
   ])
+
+suite "tokenize latex literal":
+  ttest("123 $latex$ $1/2$", @[
+    Token(tokenType: ttNumber, value: "123"),
+    Token(tokenType: ttLatex, value: "latex"),
+    Token(tokenType: ttLatex, value: "1/2"),
+  ])
