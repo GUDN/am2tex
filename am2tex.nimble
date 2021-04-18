@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.0.2"
+version       = "1.1.0"
 author        = "Daniil Novoselov"
 description   = "A AsciiMath to Latex converter"
 license       = "MIT"

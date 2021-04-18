@@ -128,3 +128,10 @@ suite "parse complex expressions":
       subchild.sub.nodeType == ntEmpty
       subchild.base.nodeType == ntBExpr
       subchild.base.children[1].nodeType == ntFraction
+
+suite "parse latex literals":
+  test r"$\frac{1}{2}$":
+    let result = parse(r"$\frac{1}{2}$")
+    check:
+      result.nodeType == ntLatex
+      result.value == r"\frac{1}{2}"

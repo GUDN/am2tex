@@ -7,7 +7,7 @@ type
   NodeType* = enum
     ntInterval, ntMatrix, ntLine,
     ntFunction, ntBinary, ntUnary,
-    ntFString, ntString
+    ntFString, ntString, ntLatex
     ntBExpr, ntExpr,
     ntOperation, ntFraction,
     ntSubsup,
@@ -453,6 +453,11 @@ proc parse*(stream: string): Node =
         continue
       fontValue = ""
     case token.tokenType
+    of ttLatex:
+      nodesList.append newDoublyLinkedNode(Node(
+        nodeType: ntLatex,
+        value: token.value
+      ))
     of ttString:
       nodesList.append newDoublyLinkedNode(Node(
         nodeType: ntString,

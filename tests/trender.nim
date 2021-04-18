@@ -14,3 +14,7 @@ suite "render complex expressions":
   test "sum_(i=1)^n i^3=((n(n+1))/2)^2":
     check render("sum_(i=1)^n i^3=((n(n+1))/2)^2") ==
       r"{\sum}_{i=1}^{n}{i}^{3}={\left(\frac{n\left(n+1\right)}{2}\right)}^{2}"
+
+suite "render latex literal":
+  test r"1 + $\frac{1}{2}$":
+    check render(r"1 + $\frac{1}{2}$") == r"1+{\frac{1}{2}}"

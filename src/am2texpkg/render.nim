@@ -40,6 +40,8 @@ proc render(node: Node): string =
   of ntToken:
     if node.tokenType in BaseTokens: result = node.value
     else: result = getTexSymbol(node.value)
+  of ntLatex:
+    result = "{" & node.value & "}"
   of ntString:
     let value = prepareString(node.value)
     result = r"\textrm{" & value & "}"
