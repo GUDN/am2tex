@@ -188,6 +188,7 @@ Psi \Psi
 omega \omega
 Omega \Omega
 | \mid
+== &=
 letter :=
 a a
 b b
